@@ -21,7 +21,7 @@ public class OnMovilePlataform : PhysicMoveStates {
 		instance = (OnMovilePlataform)this;
 
 	}
-	public override void Update()
+	public override void Update(ref PhysicMove physicMove)
 	{
 		
 	}

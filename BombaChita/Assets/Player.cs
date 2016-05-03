@@ -30,7 +30,7 @@ public class Player : MonoBehaviour {
 			//moveDirection.y = -1*speed;
 		
 		}
-		if (Input.GetKey (keyUp)) 
+		if (Input.GetKeyDown (keyUp)) 
 		{
 			moving.MoveUp ();
 		

@@ -35,7 +35,7 @@ public class RayOriginBoxCollider
 	{
 		get{ return raysNumbers;}
 	}
-	public RayOriginBoxCollider(ref BoxCollider2D  boxcoll2d,int raysNumbers)
+	public RayOriginBoxCollider(BoxCollider2D  boxcoll2d,int raysNumbers)
 	{
 		origin = boxcoll2d;
 		this.raysNumbers = raysNumbers;
@@ -53,7 +53,7 @@ public class RayOriginBoxCollider
 
 
 	}
-	public void UpdateRays(ref BoxCollider2D boxcoll2d)
+	public void UpdateRays(BoxCollider2D boxcoll2d)
 	{
 		origin = boxcoll2d;
 		SetSidePoints ();

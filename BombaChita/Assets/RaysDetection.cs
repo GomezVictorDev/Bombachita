@@ -30,10 +30,10 @@ public class RaysDetection  {//esta clase debe decir quien tiene la bomba y otra
 		get{return rightData; }
 	}
 
-	public RaysDetection (ref BoxCollider2D boxCollider2D,LayerMask layerFilter) 
+	public RaysDetection (BoxCollider2D boxCollider2D,LayerMask layerFilter) 
 	{
 		this.boxCollider2D =boxCollider2D;
-		raysOrigin = new RayOriginBoxCollider (ref boxCollider2D, 4);
+		raysOrigin = new RayOriginBoxCollider ( boxCollider2D, 4);
 		this.layerFilterDetection = layerFilter;
 	
 	}
@@ -42,7 +42,7 @@ public class RaysDetection  {//esta clase debe decir quien tiene la bomba y otra
 
 	public void UpdateDettection ()
 	{
-		raysOrigin.UpdateRays (ref boxCollider2D);
+		raysOrigin.UpdateRays ( boxCollider2D);
 
 		SeeRaycast ();
 
@@ -93,7 +93,7 @@ public class RaysDetection  {//esta clase debe decir quien tiene la bomba y otra
 		{
 
 			hit = Physics2D.Raycast(raysOrigin.GetTopRays[i].origin,raysOrigin.GetTopRays[i].direction,
-				.2f,layerFilterDetection);
+				.05f,layerFilterDetection);
 			if (hit) {
 
 				return hit;
@@ -107,15 +107,18 @@ public class RaysDetection  {//esta clase debe decir quien tiene la bomba y otra
 		RaycastHit2D hit=new RaycastHit2D();
 		for (int i = 0; i < raysOrigin.GetBottRays.Length; i++) 
 		{
-
+			
 			hit = Physics2D.Raycast(raysOrigin.GetBottRays[i].origin,raysOrigin.GetBottRays[i].direction,
-				.2f,layerFilterDetection);
+				.05f,layerFilterDetection);
+			
 			if (hit) 
 			{
+				
 				return hit;
 			}
 
 		}
+
 		return hit;
 	}
 	public RaycastHit2D GetLeftHit()
@@ -168,7 +171,7 @@ public class RaysDetection  {//esta clase debe decir quien tiene la bomba y otra
 	public bool IsBottDetecting()
 	{
 		
-			if (GetBottHit()) 
+		if (GetBottHit().transform) 
 			{
 				/*gameObjectTag = hit.transform.gameObject.tag;
 				gameObjectName = hit.transform.gameObject.name;

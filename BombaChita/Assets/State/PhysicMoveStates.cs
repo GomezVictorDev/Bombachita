@@ -14,5 +14,5 @@ public abstract class PhysicMoveStates
 	{
 		physicMove.ChangeMoveState (state);
 	}
-	public abstract void Update ();
+	public abstract void Update (ref PhysicMove physicMove);
 }

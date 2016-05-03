@@ -1,24 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections;
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class PhysicMove : MonoBehaviour {
 
 	// Use this for initialization
 	Rigidbody2D rigidBody2D;
-	[SerializeField]
+
 	//DetectionController detectionController;
 	PhysicMoveStates  physicMoveState;
 	PhysicMove thisPhysicMove;
 	System.Type moveStateType;
+
+	RaysDetection raysDetection;
+	[SerializeField]
+	BoxCollider2D boxCollider2D;
+	[SerializeField]
+	LayerMask layerFilterRay;
 	public Rigidbody2D GetRigidBody2D
 	{
 		get{return  rigidBody2D;}
 	}
+	public RaysDetection GetRaysDetection
+	{
+		get{return raysDetection;}
+	}
+
 	public void Init () 
 	{
+		if(GetComponent<Rigidbody2D> ()!=null)
 		rigidBody2D= GetComponent<Rigidbody2D> ();
+		if(GetComponent<BoxCollider2D> ()!=null)
+		boxCollider2D = GetComponent<BoxCollider2D>();
+		raysDetection = new RaysDetection ( boxCollider2D, layerFilterRay);
 		thisPhysicMove=this;
-		//physicMoveState = new OnGround ( rigidBody2D/*,ref detectionController*/);
+		physicMoveState = new OnGround ();
 		//moveStateType = physicMoveState.GetType();
 		/*if (GetComponent<DetectionController> () == null)
 		{
@@ -35,6 +51,9 @@ public class PhysicMove : MonoBehaviour {
 	void Update () 
 	{
 		Debug.Log (physicMoveState);
+		raysDetection.UpdateDettection ();
+		if(physicMoveState!=null)
+			physicMoveState.Update (ref thisPhysicMove);
 	}
 
 

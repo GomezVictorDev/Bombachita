@@ -23,18 +23,22 @@ public class PlaceHolder  {
 	{
 		lastGround = ActualGround.OnGround;
 		//PhysicMoveStates OnGround = new on
-		physicMove.ChangeMoveState(new OnGround(physicMove.GetRigidBody2D));
+//		physicMove.ChangeMoveState(new OnGround(physicMove.GetRigidBody2D));
 	}
 	public void Air()
 	{
 		lastGround = ActualGround.OnAir;
 		//PhysicMoveStates OnGround = new on
-		physicMove.ChangeMoveState(new OnAir(physicMove.GetRigidBody2D));
+	//	physicMove.ChangeMoveState(new OnAir(physicMove.GetRigidBody2D));
 	}
 	public void MovilPlataform(ref Vector2 plataformVelocity)
 	{
 		lastGround = ActualGround.OnPlataform;
 		physicMove.ChangeMoveState (new OnMovilePlataform (physicMove.GetRigidBody2D, ref plataformVelocity));
+	}
+	public void Wall()
+	{
+//		physicMove.ChangeMoveState (new OnWall (physicMove.GetRigidBody2D));
 	}
 
 

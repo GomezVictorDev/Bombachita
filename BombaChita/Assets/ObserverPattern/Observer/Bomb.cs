@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using observerPattern;
 public class Bomb : Observer {
 
 	// Use this for initialization

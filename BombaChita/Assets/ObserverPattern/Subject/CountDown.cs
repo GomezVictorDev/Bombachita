@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using observerPattern;
 public class CountDown : Subject {
 	//esto es un contador countDown
 	private static CountDown instance;

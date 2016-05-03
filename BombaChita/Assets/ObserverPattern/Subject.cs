@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
+namespace  observerPattern{
 public class Subject  {
 
 	// Use this for initialization
@@ -40,4 +42,5 @@ public class Subject  {
 		}
 	
 	}
+}
 }
