@@ -6,12 +6,13 @@ public class OnGround : PhysicMoveStates {
 	// Use this for initialization
 	PhysicMoveStates instance;
 	RaysDetection raysDetection;
-	DetectionController detectionController;
-	public OnGround( Rigidbody2D rigidbody2D,ref DetectionController detectionController)
+	Rigidbody2D rigidbody2D;
+	//DetectionController detectionController;
+	public OnGround( Rigidbody2D rigidbody2D/*,ref DetectionController detectionController*/)
 	{
 		instance = (OnGround)this;
-		base.rigidbody2D = rigidbody2D;
-		this.detectionController = detectionController;
+		this.rigidbody2D = rigidbody2D;
+		//this.detectionController = detectionController;
 	
 	}
 	public OnGround()
@@ -30,13 +31,12 @@ public class OnGround : PhysicMoveStates {
 			return (OnGround)instance;
 		}
 	}
-	public override void FixedUpdate(){
+	public override void Update(){
 	}
 	public override void  MoveUp(ref PhysicMove physicMove)
 	{
-		base.rigidbody2D.velocity = Vector2.up * 30f;//para comenzar esta bien
-		instance=new OnJump(ref base.rigidbody2D,ref detectionController);
-		ChangeState(ref physicMove,instance);
+		rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,rigidbody2D.velocity.y+10);//para comenzar esta bien
+
 
 	}
 	public override void MoveDown(ref PhysicMove physicMove)
@@ -46,10 +46,10 @@ public class OnGround : PhysicMoveStates {
 
 	public override void  MoveLeft(ref PhysicMove physicMove)
 	{	
-		base.rigidbody2D.velocity = Vector2.left * 14f;
+		rigidbody2D.velocity = new Vector2 (rigidbody2D.velocity.x  -170*Time.deltaTime, rigidbody2D.velocity.y);
 	}
 	public override void  MoveRight(ref PhysicMove physicMove)
 	{	
-		base.rigidbody2D.velocity = -Vector2.left * 14f;
+		rigidbody2D.velocity = new Vector2 (rigidbody2D.velocity.x + 170 *Time.deltaTime, rigidbody2D.velocity.y);
 	}
 }

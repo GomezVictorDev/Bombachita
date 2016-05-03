@@ -6,6 +6,7 @@ public class Watch : MonoBehaviour {
 	// Use this for initialization
 	float second=0;
 	float totalSeconds=0;
+	float secondForPause;
 	int minute=0,hour=0;
 	bool run = false;
 
@@ -20,6 +21,10 @@ public class Watch : MonoBehaviour {
 	}
 	
 	// Update is called once per frame\
+	public float SetSecondsForPause
+	{
+		set{secondForPause = value; }
+	}
 	public string WatchId
 	{
 		get{ return watchID;}
@@ -95,6 +100,10 @@ public class Watch : MonoBehaviour {
 
 
 			}
+		}
+		if (totalSeconds >= secondForPause)
+		{
+			PauseWatch ();
 		}
 		//Debug.Log ("Hora:" + hour + "|Minuto:" + minute + "|Segundo:" + second);
 

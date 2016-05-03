@@ -7,11 +7,8 @@ public class RaysDetection  {//esta clase debe decir quien tiene la bomba y otra
 	//public static  Bomb bomb;
 	private  string []topData=new string[2],bottData=new string[2],leftData=new string[2],rightData= new string[2];
 
-	//CollisionInfo collisionInfo = new CollisionInfo (false, false, false, false);
 	private BoxCollider2D boxCollider2D;
 	private RayOriginBoxCollider raysOrigin;
-
-	private string gameObjectName="",gameObjectTag="";
 
 
 	private LayerMask layerFilterDetection;

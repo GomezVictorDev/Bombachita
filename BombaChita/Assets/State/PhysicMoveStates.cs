@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class PhysicMoveStates 
 {
-	protected Rigidbody2D rigidbody2D;
+	//protected Rigidbody2D rigidbody2D;
 
 	public abstract void  MoveUp (ref PhysicMove physicMove);
 	public abstract void  MoveDown ( ref PhysicMove physicMove);
@@ -14,5 +14,5 @@ public abstract class PhysicMoveStates
 	{
 		physicMove.ChangeMoveState (state);
 	}
-	public abstract void FixedUpdate ();
+	public abstract void Update ();
 }

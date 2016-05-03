@@ -3,16 +3,17 @@ using System.Collections;
 
 public class OnMovilePlataform : PhysicMoveStates {
 
-	 PhysicMoveStates instance;
-	private Vector2 plataformVelocity;
-	DetectionController detectionController;
+	PhysicMoveStates instance;
+	private Vector2 plataformVelocity= Vector2.zero;
+	//DetectionController detectionController;
+	Rigidbody2D rigidbody2D;
 
-
-	public OnMovilePlataform(Rigidbody2D rigidbody2D,ref DetectionController detectionController)
+	public OnMovilePlataform(Rigidbody2D rigidbody2D/*,ref DetectionController detectionController*/, ref Vector2 plataformVelocity)
 	{
 		instance = (OnMovilePlataform)this;
-		base.rigidbody2D = rigidbody2D;
-		this.detectionController = detectionController;
+		this.rigidbody2D = rigidbody2D;
+		this.plataformVelocity = plataformVelocity;
+	//	this.detectionController = detectionController;
 	}
 
 	public OnMovilePlataform()
@@ -20,7 +21,9 @@ public class OnMovilePlataform : PhysicMoveStates {
 		instance = (OnMovilePlataform)this;
 
 	}
-	public override void FixedUpdate(){
+	public override void Update()
+	{
+		
 	}
 	public override void  MoveUp(ref PhysicMove physicMove)
 	{
@@ -34,10 +37,10 @@ public class OnMovilePlataform : PhysicMoveStates {
 
 	public override void  MoveLeft(ref PhysicMove physicMove)
 	{	
-		base.rigidbody2D.velocity = (plataformVelocity.x+ 7f) * Vector2.left ;
+		rigidbody2D.velocity = (plataformVelocity.x+ 7f) * Vector2.left ;
 	}
 	public override void  MoveRight(ref PhysicMove physicMove)
 	{	
-		base.rigidbody2D.velocity = (plataformVelocity.x+ 7f) * -Vector2.left ;
+		rigidbody2D.velocity = (plataformVelocity.x+ 7f) * -Vector2.left ;
 	}
 }

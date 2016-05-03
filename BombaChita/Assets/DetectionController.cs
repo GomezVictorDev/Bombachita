@@ -2,8 +2,8 @@
 using System.Collections;
 [RequireComponent(typeof(BoxCollider2D))]
 public class DetectionController:MonoBehaviour {
-	
-
+//este controlador se encargara de manejar si el personaje puedesaltar, pasar la bomba
+	//si 
 	private string [] lastObjectData;
 
 	private GameObject bombWatchObject;
@@ -19,27 +19,21 @@ public class DetectionController:MonoBehaviour {
 	RaysDetection raysDetection;
 	[SerializeField]
 	private LayerMask filterLayer;
-	public  enum LastGround
-	{
-		None,Ground,Plataform
-	};
-	private LastGround lastGround=LastGround.None;
-	public LastGround GetLastGround
-	{
-		get{return lastGround; }
-	}
 
-
-
+	PlaceHolder placeHolder;
+	[SerializeField]
+	PhysicMove physicMove;
 	public void Start()
 	{
+		placeHolder = new PlaceHolder (ref physicMove);
 		boxcollider2D = GetComponent<BoxCollider2D> ();
 		lastObjectData = new string[3];
 		TimeController.Instance.CreateWatch("BombWatch");
 		bombWatch = TimeController.Instance.FindWatch ("BombWatch");
+		bombWatch.SetSecondsForPause =2f;//este valor siempre debe ser mayor al delay de la bomba!
 		raysDetection = new RaysDetection (ref boxcollider2D, filterLayer);
 		OwnerDetection = transform.gameObject.name;
-
+		                                         
 	}
 	public void FixedUpdate()
 	{
@@ -48,29 +42,34 @@ public class DetectionController:MonoBehaviour {
 		if(raysDetection.IsTopDetecting())
 		{
 			raysDetection.SaveDataFromTopDetection ();
+			ObjectDetected (raysDetection.GetTopData[0],raysDetection.GetTopData[1]);
 		}
-		if(raysDetection.IsBottDetecting())
-		{
+
+		if (raysDetection.IsBottDetecting ()) {
 			Debug.Log ("Botdetecting");
 			raysDetection.SaveDataFromBottDetection ();
-		}else
+			ObjectDetected (raysDetection.GetBottData[0],raysDetection.GetBottData[1]);
+		} else
 		{
-			lastGround=LastGround.None;
+			NoneDetected ();
 		}
 		if(raysDetection.IsLeftDetecting())
 		{
 			raysDetection.SaveDataFromLeftDetection ();
+			ObjectDetected (raysDetection.GetLeftData[0],raysDetection.GetLeftData[1]);
 		}
 		if(raysDetection.IsRightDetecting())
 		{
 			raysDetection.SaveDataFromRightDetection ();
+			ObjectDetected (raysDetection.GetRightData[0],raysDetection.GetRightData[1]);
 
 		}
 
-//		ObjectDetected (raysDetection.GetGameObjectName, raysDetection.GetGameObjectTag, "esto lo sacare");
+
 	}
 	public void PlayerDetected(string name)
 	{
+		
 		if (!GameManager.Instance.GetBomb.Owner.Equals (name)) 
 		{
 			if (bombWatch.GetSeconds >= PLAYER_DELAY) 
@@ -95,19 +94,22 @@ public class DetectionController:MonoBehaviour {
 	}
 	public void GroundDetected()
 	{
-		lastGround=LastGround.Ground;
-	}
-	public void PlataformDetected()
+		placeHolder.Ground ();
+	}public void NoneDetected()
 	{
-		lastGround=LastGround.Plataform;
+		placeHolder.Air();
+	}
+	public void PlataformDetected(ref Vector2 plataformVelocity)
+	{
+		placeHolder.MovilPlataform (ref plataformVelocity);
 	}
 
-	public void ObjectDetected(string name,string tag, string layer)
+	public void ObjectDetected(string name,string tag)
 	{
 		//el orden de los datos enviados debe ser name,tag,layer, respectivamente
 		lastObjectData[0]=name;
 		lastObjectData[1]=tag;
-		lastObjectData[0]=layer;
+
 		switch(tag)
 		{
 		case "Player":
@@ -121,9 +123,9 @@ public class DetectionController:MonoBehaviour {
 			
 			GroundDetected ();
 			break;
-		case"Plataform":
+		case"MPlataform":
 
-			GroundDetected ();
+			//PlataformDetected ();
 		break;
 
 		}
