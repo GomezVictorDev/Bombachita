@@ -4,7 +4,7 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
 	// Use this for initialization
-	public float speed;
+
 
 	public KeyCode keyUp, keyDown, keyLeft,keyRight;
 	private PhysicMove moving;
@@ -25,7 +25,7 @@ public class Player : MonoBehaviour {
 	void PlayerInputs()
 	{
 		Vector2 moveDirection= Vector2.zero;
-		if (Input.GetKey (keyDown)) 
+		if (Input.GetKeyDown (keyDown)) 
 		{
 			//moveDirection.y = -1*speed;
 		
@@ -45,6 +45,11 @@ public class Player : MonoBehaviour {
 			moving.MoveRight ();
 
 		}
+		if (Input.GetKeyUp (keyUp) || Input.GetKeyUp (keyRight)|| Input.GetKeyUp (keyLeft))
+		{
+			moving.DontMove ();
+		}
+
 		//moving.Velocity = moveDirection;
 	//	moving.Move (velocity);
 	}

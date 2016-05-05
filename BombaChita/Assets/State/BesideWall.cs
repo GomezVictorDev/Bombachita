@@ -53,4 +53,8 @@ public class BesideWall : PhysicMoveStates {
 	{	float velocityX =  Mathf.Pow(10,3) * Time.deltaTime * 1 ;
 		rigidbody2D.velocity = new Vector2 (velocityX, rigidbody2D.velocity.y);
 	}
+	public override void DontMove (ref  PhysicMove physicMove)
+	{
+		
+	}
 }

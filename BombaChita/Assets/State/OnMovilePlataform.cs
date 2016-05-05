@@ -43,4 +43,6 @@ public class OnMovilePlataform : PhysicMoveStates {
 	{	
 		rigidbody2D.velocity = (plataformVelocity.x+ 7f) * -Vector2.left ;
 	}
+	public override void DontMove (ref  PhysicMove physicMove){
+	}
 }

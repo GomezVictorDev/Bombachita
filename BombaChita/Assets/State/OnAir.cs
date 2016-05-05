@@ -27,6 +27,7 @@ public class OnAir : PhysicMoveStates {
 			{
 				
 				instance= new OnGround();
+				ChangeAnimation (ref physicMove, "isIdle");
 				ChangeState (ref physicMove, instance);
 			}
 		}
@@ -45,15 +46,18 @@ public class OnAir : PhysicMoveStates {
 	public override void  MoveLeft(ref PhysicMove physicMove)
 	{	if (!physicMove.GetRaysDetection.IsLeftDetecting ())
 		{
-			float velocityX = Mathf.Pow (10, 3) * Time.deltaTime * -1;
+			float velocityX = Mathf.Pow (physicMove.PlayerSpeed, 3) * Time.deltaTime * -1;
 			physicMove.GetRigidBody2D.velocity = new Vector2 (velocityX, physicMove.GetRigidBody2D.velocity.y);
 		}
 	}
 	public override void  MoveRight(ref PhysicMove physicMove)
 	{	if (!physicMove.GetRaysDetection.IsRightDetecting ())
 		{
-			float velocityX = Mathf.Pow (10, 3) * Time.deltaTime * 1;
+			float velocityX = Mathf.Pow (physicMove.PlayerSpeed, 3) * Time.deltaTime * 1;
 			physicMove.GetRigidBody2D.velocity = new Vector2 (velocityX, physicMove.GetRigidBody2D.velocity.y);
 		}
+	}
+	public override void DontMove (ref  PhysicMove physicMove)
+	{
 	}
 }
