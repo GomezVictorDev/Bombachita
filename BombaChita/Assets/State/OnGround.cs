@@ -26,7 +26,7 @@ public class OnGround : PhysicMoveStates {
 //		Debug.Log ("botGround> " + physicMove.GetRaysDetection.IsBottDetecting ());
 		if(physicMove.GetRigidBody2D.velocity == Vector2.zero)
 		{
-			ChangeAnimation (ref physicMove, "isIdle");
+			ChangeAnimation (ref physicMove, "isIdle\t");
 		}
 	}
 
